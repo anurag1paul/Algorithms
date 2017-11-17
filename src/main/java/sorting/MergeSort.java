@@ -3,6 +3,7 @@ package sorting;
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
  *         Date: 14/11/17
+ *         Runtime: O(n log(n))
  */
 public class MergeSort {
 

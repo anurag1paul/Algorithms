@@ -19,6 +19,12 @@ public class MergeSortTest {
 
         int[] input3= {9,8,7,6,5,4,3,2,1};
         check(input3);
+
+        int[] input4 = {10};
+        check(input4);
+
+        int[] input5 ={10,5};
+        check(input5);
     }
 
     private void check(int[] input) {
