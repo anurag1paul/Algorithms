@@ -11,7 +11,9 @@ import java.util.*;
  *         Date: 23/6/17
  */
 public class MinimumSpanningTree extends Tree {
+
     private double weight;
+
     private Map<AbstractMap.SimpleImmutableEntry<Integer, Integer>, Integer> edges = new HashMap<>();
 
     public MinimumSpanningTree(Graph graph) {
