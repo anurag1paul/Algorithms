@@ -71,7 +71,7 @@ public class karatsubaAlgorithm {
         return out;
     }
 
-    private static String expand(String num, int len) {
+    static String expand(String num, int len) {
 
         StringBuilder newNum = new StringBuilder();
         newNum.append(num);
@@ -82,7 +82,7 @@ public class karatsubaAlgorithm {
         return newNum.toString();
     }
 
-    private static String equalizeLength(String num, int diff) {
+    static String equalizeLength(String num, int diff) {
 
         StringBuilder out = new StringBuilder();
 
