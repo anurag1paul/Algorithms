@@ -8,13 +8,6 @@ import java.math.BigInteger;
  */
 public class karatsubaAlgorithm {
 
-    public static String multiply(String a, String b){
-        StringBuilder x = new StringBuilder(a);
-        StringBuilder y = new StringBuilder(b);
-
-        return multiply(x, y).toString();
-    }
-
     /*
      * Algorithm Steps:
      * n  = max(len(x), len(y))
@@ -23,7 +16,7 @@ public class karatsubaAlgorithm {
      * So just need to calculate ac, bd and (a+b) * (c+d) recursively
      */
 
-    private static StringBuilder multiply(StringBuilder x, StringBuilder y) {
+    public static String multiply(String x, String y) {
 
         int len = 0;
         int lenX = x.length();
@@ -41,29 +34,25 @@ public class karatsubaAlgorithm {
         }
 
         if(len == 0){
-            StringBuilder out = new StringBuilder();
-            out.append('0');
-            return out;
+            return "0";
         }
 
         if (len == 1) {
-            int output = Integer.parseInt(x.toString()) * Integer.parseInt(y.toString());
-            StringBuilder out = new StringBuilder();
-            out.append(output);
-            return out;
+            Integer output = Integer.parseInt(x) * Integer.parseInt(y);
+            return output.toString();
         }
 
         int mid = len/2;
         int sh = len-mid;
 
-        StringBuilder a = new StringBuilder(x.substring(0, mid));
-        StringBuilder b = new StringBuilder(x.substring(mid, len));
-        StringBuilder c = new StringBuilder(y.substring(0, mid));
-        StringBuilder d = new StringBuilder(y.substring(mid, len));
+        String a = x.substring(0, mid);
+        String b = x.substring(mid, len);
+        String c = y.substring(0, mid);
+        String d = y.substring(mid, len);
 
-        StringBuilder ac = multiply(a, c);
-        StringBuilder bd = multiply(b, d);
-        StringBuilder middle = diff(multiply(add(a,b), add(c,d)), ac, bd);
+        String ac = multiply(a, c);
+        String bd = multiply(b, d);
+        String middle = diff(multiply(add(a,b), add(c,d)), ac, bd);
 
         return add(expand(ac, 2*sh), expand(middle, sh), bd);
     }
@@ -82,14 +71,18 @@ public class karatsubaAlgorithm {
         return out;
     }
 
-    private static StringBuilder expand(StringBuilder num, int len) {
+    private static String expand(String num, int len) {
+
+        StringBuilder newNum = new StringBuilder();
+        newNum.append(num);
 
         for(int i = 0; i< len; i++)
-            num.append('0');
-        return num;
+            newNum.append('0');
+
+        return newNum.toString();
     }
 
-    private static StringBuilder equalizeLength(StringBuilder num, int diff) {
+    private static String equalizeLength(String num, int diff) {
 
         StringBuilder out = new StringBuilder();
 
@@ -97,25 +90,25 @@ public class karatsubaAlgorithm {
             out.append('0');
 
         out.append(num);
-        return out;
+        return out.toString();
     }
 
-    static StringBuilder add(StringBuilder largeNum, StringBuilder... nums) {
-        BigInteger output = new BigInteger(largeNum.toString());
+    static String add(String largeNum, String... nums) {
+        BigInteger output = new BigInteger(largeNum);
 
-        for(StringBuilder num : nums)
-            output = output.add(new BigInteger(num.toString()));
+        for(String num : nums)
+            output = output.add(new BigInteger(num));
 
-        return new StringBuilder(output.toString());
+        return output.toString();
     }
 
-    static StringBuilder diff(StringBuilder largeNum, StringBuilder... nums) {
+    static String diff(String largeNum, String... nums) {
 
-        BigInteger output = new BigInteger(largeNum.toString());
+        BigInteger output = new BigInteger(largeNum);
 
-        for(StringBuilder num : nums)
-            output = output.subtract(new BigInteger(num.toString()));
+        for(String num : nums)
+            output = output.subtract(new BigInteger(num));
 
-        return new StringBuilder(output.toString());
+        return output.toString();
     }
 }

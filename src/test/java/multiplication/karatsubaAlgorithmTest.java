@@ -22,22 +22,17 @@ public class karatsubaAlgorithmTest {
 
     @Test
     public void addTest(){
-        StringBuilder num1 = new StringBuilder();
-        num1.append("12");
-        StringBuilder num2 = new StringBuilder();
-        num2.append("78");
-        System.out.println(karatsubaAlgorithm.add(num1, num2));
+        String num1 = "78";
+        String num2 = "12";
+        Assert.assertEquals("90", karatsubaAlgorithm.add(num1, num2));
     }
 
     @Test
     public void diffTest(){
-        StringBuilder num1 = new StringBuilder();
-        num1.append("78");
-        StringBuilder num2 = new StringBuilder();
-        num2.append("12");
-        StringBuilder num3 = new StringBuilder();
-        num3.append("12");
-        System.out.println(karatsubaAlgorithm.diff(num1, num2, num3));
+        String num1 = "78";
+        String num2 = "12";
+        String num3 = "10";
+        Assert.assertEquals("56", karatsubaAlgorithm.diff(num1, num2, num3));
     }
 
     @Test
