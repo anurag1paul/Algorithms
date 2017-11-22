@@ -1,4 +1,4 @@
-package sorting;
+package divideAndConquer;
 
 import org.junit.Assert;
 import org.junit.Test;

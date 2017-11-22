@@ -1,4 +1,4 @@
-package sorting;
+package divideAndConquer;
 
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
