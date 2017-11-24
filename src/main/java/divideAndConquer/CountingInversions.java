@@ -12,19 +12,19 @@ import java.util.Map;
  */
 public class CountingInversions {
 
-    private final int[] input;
+    private final long[] input;
 
-    public CountingInversions(int[] input){
+    public CountingInversions(long[] input){
         this.input = input;
     }
 
-    public int getNumInversions(){
+    public long getNumInversions(){
         Map<String, Object> inputMap = createInput(input, 0);
         Map<String, Object> output = sortAndCount(inputMap);
-        return (int) output.get("count");
+        return (long) output.get("count");
     }
 
-    private Map<String, Object> createInput(int[] array, int count) {
+    private Map<String, Object> createInput(long[] array, long count) {
         Map<String, Object> input = new HashMap<>();
         input.put("array", array);
         input.put("count", count);
@@ -33,13 +33,13 @@ public class CountingInversions {
 
     private Map<String, Object> sortAndCount(Map<String, Object> inputMap) {
 
-        int[] input = (int[]) inputMap.get("array");
+        long[] input = (long[]) inputMap.get("array");
 
         if (input.length > 1) {
             int split = input.length / 2;
-            int[] front, back;
-            front = new int[split];
-            back = new int[input.length - split];
+            long[] front, back;
+            front = new long[split];
+            back = new long[input.length - split];
 
             for(int i = 0, j=0, k=0; i < input.length; i++) {
                 if(i < split) {
@@ -60,13 +60,13 @@ public class CountingInversions {
 
     private Map<String, Object> merge(Map<String, Object> aMap, Map<String, Object> bMap){
 
-        int[] a = (int[]) aMap.get("array");
-        int[] b = (int[]) bMap.get("array");
+        long[] a = (long[]) aMap.get("array");
+        long[] b = (long[]) bMap.get("array");
 
-        int count = (int) aMap.get("count") + (int) bMap.get("count");
+        long count = (long) aMap.get("count") + (long) bMap.get("count");
 
         int len_merge = a.length + b.length;
-        int[] c = new int[len_merge];
+        long[] c = new long[len_merge];
 
         for(int k=0, i=0, j=0; k<len_merge; k++) {
 
