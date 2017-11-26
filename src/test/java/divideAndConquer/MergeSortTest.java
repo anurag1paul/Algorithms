@@ -1,5 +1,6 @@
 package divideAndConquer;
 
+import divideAndConquer.sorting.MergeSort;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package multiplication;
+package divideAndConquer.multiplication;
 
 import java.math.BigInteger;
 
@@ -6,7 +6,7 @@ import java.math.BigInteger;
  * @author Anurag Paul(anurag.paul@delhivery.com)
  *         Date: 17/11/17
  */
-public class karatsubaAlgorithm {
+public class KaratsubaAlgorithm {
 
     /*
      * Algorithm Steps:

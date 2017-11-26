@@ -1,4 +1,4 @@
-package multiplication;
+package divideAndConquer.multiplication;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,14 +17,14 @@ public class karatsubaAlgorithmTest {
         Long num2 = 5678L;
         Long expected = num1 * num2;
 
-        Assert.assertEquals(expected.toString(), karatsubaAlgorithm.multiply(num1.toString(),num2.toString()));
+        Assert.assertEquals(expected.toString(), KaratsubaAlgorithm.multiply(num1.toString(),num2.toString()));
     }
 
     @Test
     public void addTest(){
         String num1 = "78";
         String num2 = "12";
-        Assert.assertEquals("90", karatsubaAlgorithm.add(num1, num2));
+        Assert.assertEquals("90", KaratsubaAlgorithm.add(num1, num2));
     }
 
     @Test
@@ -32,19 +32,19 @@ public class karatsubaAlgorithmTest {
         String num1 = "78";
         String num2 = "12";
         String num3 = "10";
-        Assert.assertEquals("56", karatsubaAlgorithm.diff(num1, num2, num3));
+        Assert.assertEquals("56", KaratsubaAlgorithm.diff(num1, num2, num3));
     }
 
     @Test
     public void expandTest(){
         String num = "22";
-        Assert.assertEquals("2200", karatsubaAlgorithm.expand(num, 2));
+        Assert.assertEquals("2200", KaratsubaAlgorithm.expand(num, 2));
     }
 
     @Test
     public void equaliseLengthTest(){
         String num="102";
-        Assert.assertEquals("0102", karatsubaAlgorithm.equalizeLength(num, 1));
+        Assert.assertEquals("0102", KaratsubaAlgorithm.equalizeLength(num, 1));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class karatsubaAlgorithmTest {
         String num2 = "2718281828459045235360287471352662497757247093699959574966967627";
 
         long start = System.nanoTime();
-        String out = karatsubaAlgorithm.multiply(num1,num2);
+        String out = KaratsubaAlgorithm.multiply(num1,num2);
         long end = System.nanoTime();
         System.out.println("Karatsuba String Based Implementation Time Taken = " + (end -start) + "ns");
 

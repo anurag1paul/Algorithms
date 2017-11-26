@@ -1,4 +1,4 @@
-package divideAndConquer;
+package divideAndConquer.sorting;
 
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
