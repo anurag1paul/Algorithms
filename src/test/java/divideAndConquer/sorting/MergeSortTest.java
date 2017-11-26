@@ -1,4 +1,4 @@
-package divideAndConquer;
+package divideAndConquer.sorting;
 
 import divideAndConquer.sorting.MergeSort;
 import org.junit.Assert;
