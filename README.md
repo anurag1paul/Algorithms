@@ -5,7 +5,7 @@ I study them form various books and online sources.
 
 # Implemented so far:-
 - Divide and Conquer Family of Algorithms
-    - Karatsuba Algorithm for divideAndConquer.multiplication
+    - Karatsuba Algorithm for multiplication
     - Merge Sort
     - Counting Inversions
     - Quick Sort
