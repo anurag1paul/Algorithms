@@ -8,53 +8,44 @@ public class QuickSort {
         FIRST, LAST, MEDIAN
     }
 
-    private int numComparisons = 0;
+    private long numComparisons = 0;
     private PivotType type;
 
     public QuickSort(PivotType type){
         this.type = type;
     }
 
+    public long getNumComparisons() {
+        return numComparisons;
+    }
+
+    public int[] sort(int[] input) {
+        numComparisons = 0;
+        return sort(input, 0, input.length);
+    }
+
     public void setType(PivotType type) {
         this.type = type;
     }
 
-    public int[] sort(int[] input, int len){
+    private int[] sort(int[] array, int start, int end){
 
-        if(len == 1)
-            return input;
+        int len = end - start;
 
+        if(len <= 1)
+            return array;
 
-        return input;
-    }
-
-    private int getPivot(int[] array, int start, int end) {
-        int pivot;
-
-        switch (type) {
-            case FIRST: pivot = array[start];
-                break;
-            case LAST: pivot = array[end -1];
-                break;
-            case MEDIAN: pivot = array[start];
-                break;
-            default: throw new IllegalArgumentException();
-        }
-
-        return pivot;
-    }
-
-    private int[] partition(int[] array, int start, int end) {
-        numComparisons += (end - start);
-        int pivot = getPivot(array, start, end);
+        numComparisons += (len-1);
+        int pivotPosition = getPivotPosition(array, start, end);
 
         if(type != FIRST) {
-            array = swap(array, pivot, start);
+            array = swap(array, pivotPosition, start);
         }
 
-        int pivotPosition = start + 1;
-        boolean seenGreater = false;
+        int pivot = array[start];
 
+        pivotPosition = start + 1;
+        boolean seenGreater = false;
         for(int j = start + 1; j < end; j++){
             if(array[j] < pivot){
                 if(seenGreater)
@@ -63,15 +54,61 @@ public class QuickSort {
             } else
                 seenGreater= true;
         }
-        array = swap(array, start, pivotPosition-1);
+        array = swap(array, start, pivotPosition - 1);
+
+        // sort left part
+        array = sort(array, start, pivotPosition - 1);
+        // sort right part
+        array = sort(array, pivotPosition, end);
         return array;
+    }
+
+    private int getPivotPosition(int[] array, int start, int end) {
+        int pivotPosition;
+
+        switch (type) {
+            case FIRST: pivotPosition = start;
+                break;
+            case LAST: pivotPosition = end -1;
+                break;
+            case MEDIAN: pivotPosition = getMedianPivotPosition(array, start, end);
+                break;
+            default: throw new IllegalArgumentException();
+        }
+
+        return pivotPosition;
+    }
+
+    private int getMedianPivotPosition(int[] array, int start, int end){
+        int pivotPosition;
+
+        int startVal = array[start];
+        int endVal = array[end-1];
+        int len = end-start;
+
+        int factor = len%2==0?(len/2)-1:len/2;
+        int midPos = start + factor;
+        int midVal = array[midPos];
+
+        int max = Math.max(Math.max(startVal, endVal), midVal);
+        int min = Math.min(Math.min(startVal, endVal), midVal);
+
+        if(startVal != max && startVal != min)
+            pivotPosition = start;
+        else if(endVal != max && endVal != min)
+            pivotPosition = end-1;
+        else
+            pivotPosition = midPos;
+
+        return pivotPosition;
     }
 
     private int[] swap(int[] array, int oldPos, int newPos) {
-        array[newPos] = array[newPos] + array[oldPos];
-        array[oldPos] = array[newPos] - array[oldPos];
-        array[newPos] = array[newPos] - array[oldPos];
+        if(oldPos != newPos) {
+            array[newPos] = array[newPos] + array[oldPos];
+            array[oldPos] = array[newPos] - array[oldPos];
+            array[newPos] = array[newPos] - array[oldPos];
+        }
         return array;
     }
-
 }

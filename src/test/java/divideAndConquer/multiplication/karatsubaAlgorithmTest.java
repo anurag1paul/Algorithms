@@ -54,6 +54,7 @@ public class karatsubaAlgorithmTest {
 
         long start = System.nanoTime();
         String out = KaratsubaAlgorithm.multiply(num1,num2);
+        System.out.println(out);
         long end = System.nanoTime();
         System.out.println("Karatsuba String Based Implementation Time Taken = " + (end -start) + "ns");
 
