@@ -1,6 +1,7 @@
 package divideAndConquer.sorting;
 
 import static divideAndConquer.sorting.QuickSort.PivotType.FIRST;
+import static utils.utils.swap;
 
 public class QuickSort {
 
@@ -50,7 +51,7 @@ public class QuickSort {
             if(array[j] < pivot){
                 if(seenGreater)
                     array = swap(array, j, pivotPosition);
-                pivotPosition += 1;
+                pivotPosition++;
             } else
                 seenGreater= true;
         }
@@ -101,14 +102,5 @@ public class QuickSort {
             pivotPosition = midPos;
 
         return pivotPosition;
-    }
-
-    private int[] swap(int[] array, int oldPos, int newPos) {
-        if(oldPos != newPos) {
-            array[newPos] = array[newPos] + array[oldPos];
-            array[oldPos] = array[newPos] - array[oldPos];
-            array[newPos] = array[newPos] - array[oldPos];
-        }
-        return array;
     }
 }
