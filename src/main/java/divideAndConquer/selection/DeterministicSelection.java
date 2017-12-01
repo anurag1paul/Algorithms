@@ -1,10 +1,7 @@
 package divideAndConquer.selection;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import static java.lang.Math.random;
-import static utils.utils.swap;
+import java.util.Collections;
 
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
@@ -19,12 +16,10 @@ public class DeterministicSelection {
         if(orderStatistic > len || orderStatistic <= 0)
             throw new IllegalArgumentException("Order Statistic must be lie between zero and length of the array");
 
-        return dSelect(input, orderStatistic);
+        return dSelect(input, input.length, orderStatistic);
     }
 
-    private static int dSelect(int[] array, int orderStatistic) {
-
-        double len = array.length;
+    private static int dSelect(int[] array, double len, int orderStatistic) {
 
         if(len == 1)
             return array[0];
@@ -34,47 +29,52 @@ public class DeterministicSelection {
         ArrayList<Integer> smaller = new ArrayList<>();
         ArrayList<Integer> greater = new ArrayList<>();
 
+        int equalCount = 0;
+
         for (int element : array) {
             if (element < pivot)
                 smaller.add(element);
             else if (element > pivot)
                 greater.add(element);
+            else
+                equalCount++;
         }
-        int pivotPosition = smaller.size();
+        int pivotPosition = smaller.size() + 1;
 
-        if (pivotPosition == orderStatistic)
+        if (pivotPosition <= orderStatistic && orderStatistic <= (pivotPosition + equalCount))
             return pivot;
         else if (pivotPosition > orderStatistic)
-            return dSelect(getArray(smaller), orderStatistic);
+            return dSelect(getArray(smaller), smaller.size(), orderStatistic);
         else
-            return dSelect(getArray(greater), orderStatistic - pivotPosition);
+            return dSelect(getArray(greater), greater.size(), orderStatistic - pivotPosition);
     }
 
     private static int[] getArray(ArrayList<Integer> list) {
         int len = list.size();
         int[] array = new int[len];
-        for(int i=0; i< len; i++){
+        for(int i = 0; i < len; i++){
             array[i] = list.get(i);
         }
         return array;
     }
-
 
     private static int getPivot(int[] array) {
         double length = array.length;
         int splits = (int) Math.ceil(length / 5.0);
 
         int[] medianArray = new int[splits];
-        int[] split = new int[5];
 
         for(int i=0; i<splits; i++){
-            for(int j=i*5, k=0; k<5 && j <length; j++, k++){
-                split[k] = array[j];
+            ArrayList<Integer> split = new ArrayList<>();
+
+            for(int j=i*5, k=0; k < 5 && j < length; j++, k++){
+                split.add(array[j]);
             }
-            Arrays.sort(split);
-            medianArray[i] = split[2];
+
+            Collections.sort(split);
+            medianArray[i] = split.get(split.size()/2);
         }
 
-        return dSelect(medianArray, (int) Math.floor(length/2.0));
+        return dSelect(medianArray, medianArray.length, (int) Math.floor(medianArray.length/2.0));
     }
 }

@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 public class utils {
 
     public static int[] swap(int[] array, int oldPos, int newPos) {
@@ -10,5 +12,19 @@ public class utils {
             array[newPos] = array[newPos] - array[oldPos];
         }
         return array;
+    }
+
+    public static void printArray(int[] arr){
+        System.out.println("Array is");
+        for(int i: arr)
+            System.out.print(i + ",");
+        System.out.println();
+    }
+
+    public static void printList(List<Integer> arr){
+        System.out.println("List is");
+        for(Integer i: arr)
+            System.out.print(i + ",");
+        System.out.println();
     }
 }

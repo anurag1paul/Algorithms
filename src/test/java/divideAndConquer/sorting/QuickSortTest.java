@@ -1,6 +1,5 @@
 package divideAndConquer.sorting;
 
-import divideAndConquer.CountingInversions;
 import org.junit.Assert;
 import org.junit.Test;
 
