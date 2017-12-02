@@ -11,15 +11,15 @@ import java.util.Map;
  * @author Anurag Paul(anurag.paul@delhivery.com)
  *         Date: 23/6/17
  */
-public class Graph {
+public class WeightedGraph {
 
-    private static Logger logger = LoggerFactory.getLogger(Graph.class);
+    private static Logger logger = LoggerFactory.getLogger(WeightedGraph.class);
 
     final private int numVertices;
     final private int numEdges;
     final private Map<AbstractMap.SimpleImmutableEntry<Integer, Integer>, Integer> edges;
 
-    private Graph(Builder builder){
+    private WeightedGraph(Builder builder){
         numVertices = builder.numVertices;
         numEdges = builder.numEdges;
         edges = builder.edges;
@@ -59,9 +59,9 @@ public class Graph {
                 logger.warn("Edge not added: start:{} end:{}", start, end);
         }
 
-        public Graph build(){
+        public WeightedGraph build(){
             if(edges.size() == numEdges)
-                return new Graph(this);
+                return new WeightedGraph(this);
             else
                 throw new IllegalStateException("Edges added are less than numEdges");
         }

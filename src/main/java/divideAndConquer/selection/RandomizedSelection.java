@@ -3,6 +3,10 @@ package divideAndConquer.selection;
 import static java.lang.Math.random;
 import static utils.utils.swap;
 
+/**
+ * @author Anurag Paul(anurag.paul@delhivery.com)
+ *         Date: 1/12/17
+ */
 public class RandomizedSelection {
 
     public static int getOrderStatistic(int[] input, int orderStatistic) {

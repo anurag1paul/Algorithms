@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Anurag Paul(anurag.paul@delhivery.com)
  *         Date: 23/6/17
  */
-public class GraphTest {
+public class WeightedGraphTest {
 
     @Test
     public void test(){

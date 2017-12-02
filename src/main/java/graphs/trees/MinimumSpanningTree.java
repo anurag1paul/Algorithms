@@ -1,6 +1,6 @@
 package graphs.trees;
 
-import graphs.Graph;
+import graphs.WeightedGraph;
 import sets.DisjointSet;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
@@ -19,7 +19,7 @@ public class MinimumSpanningTree extends Tree {
 
     private Map<SimpleImmutableEntry<Integer, Integer>, Integer> edges = new HashMap<>();
 
-    public MinimumSpanningTree(Graph graph) {
+    public MinimumSpanningTree(WeightedGraph graph) {
         generateMST(this, graph);
     }
 
@@ -31,7 +31,7 @@ public class MinimumSpanningTree extends Tree {
         return edges;
     }
 
-    private static void generateMST(MinimumSpanningTree mst, Graph graph) {
+    private static void generateMST(MinimumSpanningTree mst, WeightedGraph graph) {
         DisjointSet disjointSet = new DisjointSet(graph.getNumVertices());
 
         //generate sorted array of edges
