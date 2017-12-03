@@ -9,5 +9,7 @@ I study them form various books and online sources.
     - Merge Sort
     - Counting Inversions
     - Quick Sort
+    - Randomized and Deterministic Selection
 - Graph based Data Structures and Algorithms
     - Minimum Spanning Tree Implementation
+    - Karger's Min Cut Algorithm
