@@ -1,11 +1,13 @@
 package graphs.minCut;
 
+import graphs.Edge;
+import graphs.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sets.DisjointSet;
 
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -19,8 +21,8 @@ public class KargerMinCut {
 
     public KargerMinCut(Graph graph){
         initialGraph = graph;
-        int nodes = graph.getNodes().size();
-        numIters = Math.pow(nodes, 2) * Math.log(nodes);
+        int numVertices = graph.getNumVertices();
+        numIters = Math.pow(numVertices, 2) * (Math.log(numVertices) / Math.log(2));
     }
 
     public double getNumIters() {
@@ -56,34 +58,46 @@ public class KargerMinCut {
             }
         }
 
-        private int generateMinCut() {
+        int generateMinCut() {
+            int numVertices = graph.getNumVertices(), numEdges = graph.getNumEdges();
+            List<Edge> edges = new ArrayList<>();
+            edges.addAll(graph.getEdges().keySet());
 
-            int nNodes = graph.getNodes().size() + 1;
+            DisjointSet disjointSet = new DisjointSet(numVertices);
 
-            while(graph.getNodes().size() > 2) {
+            int vertices = numVertices;
 
-                List<Edge> edges = new LinkedList<>();
-                edges.addAll(graph.getEdges());
-                Edge collapseEdge = edges.get(random.nextInt(edges.size()));
+            // Keep contracting vertices until there are only 2 vertices left.
+            while (vertices > 2) {
+                try {
+                    int i = random.nextInt(numEdges);
 
-                List<Integer> adjacentNodes = new ArrayList<>();
-                edges.remove(collapseEdge);
+                    // Find vertices of current edge
+                    int vertex1 = disjointSet.find(edges.get(i).src - 1);
+                    int vertex2 = disjointSet.find(edges.get(i).dst - 1);
 
-                for(Edge edge: edges){
-                    if((collapseEdge.src == edge.src && collapseEdge.dst != edge.dst) ||
-                            (collapseEdge.dst == edge.src && collapseEdge.src != edge.dst))
-                        adjacentNodes.add(edge.dst);
-                    else if ((collapseEdge.src == edge.dst && collapseEdge.dst != edge.src)||
-                            (collapseEdge.dst == edge.dst && collapseEdge.src != edge.src))
-                        adjacentNodes.add(edge.src);
+                    // if the two vertices are different, contract the edge
+                    if (vertex1 != vertex2) {
+                        vertices--;
+                        disjointSet.union(vertex1, vertex2);
+                    }
+                }catch (Exception e){
+                    logger.error("", e);
                 }
-
-                graph.addNode(nNodes++, adjacentNodes, true);
-                graph.removeNode(collapseEdge.src);
-                graph.removeNode(collapseEdge.dst);
             }
-            logger.info("Counter:{} minCut: {}", count.incrementAndGet(), graph.getEdges().size());
-            return graph.getEdges().size();
+
+            //Count the edges between the two vertices left in the graph
+            int cutEdges = 0;
+            for (int i=0; i<numEdges; i++)
+            {
+                int vertex1 = disjointSet.find(edges.get(i).src - 1);
+                int vertex2 = disjointSet.find(edges.get(i).dst - 1);
+                if (vertex1 != vertex2)
+                    cutEdges++;
+            }
+
+            logger.info("Count:{} minCut:{}", count.incrementAndGet(), cutEdges);
+            return cutEdges;
         }
 
         public int getMinCut() {
@@ -98,12 +112,12 @@ public class KargerMinCut {
         List<Worker> workers = new ArrayList<>();
 
         ExecutorService es = Executors.newFixedThreadPool(poolSize);
-        final Semaphore semaphore = new Semaphore(2 * poolSize);
+        final Semaphore semaphore = new Semaphore(poolSize);
 
         Worker.count = new AtomicInteger(0);
 
         for(int i=0; i<numIters; i++) {
-            Worker worker = new Worker(new Graph(initialGraph), new Random(i), semaphore);
+            Worker worker = new Worker(initialGraph, new Random(i), semaphore);
             workers.add(worker);
             es.submit(worker);
         }

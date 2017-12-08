@@ -1,6 +1,7 @@
 package graphs.trees;
 
-import graphs.WeightedGraph;
+import graphs.Edge;
+import graphs.Graph;
 import sets.DisjointSet;
 
 import java.util.AbstractMap.SimpleImmutableEntry;
@@ -17,9 +18,9 @@ public class MinimumSpanningTree extends Tree {
 
     private double weight;
 
-    private Map<SimpleImmutableEntry<Integer, Integer>, Integer> edges = new HashMap<>();
+    private Map<Edge, Integer> edges = new HashMap<>();
 
-    public MinimumSpanningTree(WeightedGraph graph) {
+    public MinimumSpanningTree(Graph graph) {
         generateMST(this, graph);
     }
 
@@ -27,24 +28,24 @@ public class MinimumSpanningTree extends Tree {
         return weight;
     }
 
-    public Map<SimpleImmutableEntry<Integer, Integer>, Integer> getEdges() {
+    public Map<Edge, Integer> getEdges() {
         return edges;
     }
 
-    private static void generateMST(MinimumSpanningTree mst, WeightedGraph graph) {
+    private static void generateMST(MinimumSpanningTree mst, Graph graph) {
         DisjointSet disjointSet = new DisjointSet(graph.getNumVertices());
 
         //generate sorted array of edges
-        PriorityQueue<Map.Entry<SimpleImmutableEntry<Integer, Integer>, Integer>>
-        sortedGraphEdges= new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue));
+        PriorityQueue<Map.Entry<Edge, Integer>>
+                sortedGraphEdges= new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue));
         sortedGraphEdges.addAll(graph.getEdges().entrySet());
 
         while(!sortedGraphEdges.isEmpty()){
-            Map.Entry<SimpleImmutableEntry<Integer, Integer>, Integer> weightedEdge = sortedGraphEdges.poll();
-            SimpleImmutableEntry<Integer, Integer> edge = weightedEdge.getKey();
+            Map.Entry<Edge, Integer> weightedEdge = sortedGraphEdges.poll();
+            Edge edge = weightedEdge.getKey();
 
-            int firstParent = disjointSet.find(edge.getKey());
-            int secondParent = disjointSet.find(edge.getValue());
+            int firstParent = disjointSet.find(edge.src);
+            int secondParent = disjointSet.find(edge.dst);
 
             if(firstParent != secondParent){
                 disjointSet.union(firstParent, secondParent);

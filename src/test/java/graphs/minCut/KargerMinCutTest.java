@@ -1,5 +1,6 @@
 package graphs.minCut;
 
+import graphs.Graph;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,23 +11,24 @@ public class KargerMinCutTest {
         String base = "data/kargerMinCutTest";
 
         //test1
-        KargerMinCut cutGen = new KargerMinCut(new Graph(base + "1.txt"));
+        Graph graph = Graph.Builder.newInstance(base + "1.txt", " ").build();
+        KargerMinCut cutGen = new KargerMinCut(graph);
         Assert.assertEquals(2, cutGen.searchMinCuts());
 
         //test2
-        cutGen = new KargerMinCut(new Graph(base + "2.txt"));
+        cutGen = new KargerMinCut(Graph.Builder.newInstance(base + "2.txt", " ").build());
         Assert.assertEquals(2, cutGen.searchMinCuts());
 
         //test3
-        cutGen = new KargerMinCut(new Graph(base + "3.txt"));
+        cutGen = new KargerMinCut(Graph.Builder.newInstance(base + "3.txt", " ").build());
         Assert.assertEquals(1, cutGen.searchMinCuts());
 
         //test4
-        cutGen = new KargerMinCut(new Graph(base + "4.txt"));
+        cutGen = new KargerMinCut(Graph.Builder.newInstance(base + "4.txt", " ").build());
         Assert.assertEquals(1, cutGen.searchMinCuts());
 
         //test5
-        cutGen = new KargerMinCut(new Graph(base + "5.txt"));
+        cutGen = new KargerMinCut(Graph.Builder.newInstance(base + "5.txt", " ").build());
         Assert.assertEquals(3, cutGen.searchMinCuts());
     }
 
@@ -35,7 +37,7 @@ public class KargerMinCutTest {
         String file = "data/kargerMinCut.txt";
 
         //test1
-        KargerMinCut cutGen = new KargerMinCut(new Graph(file, "\t"));
+        KargerMinCut cutGen = new KargerMinCut(Graph.Builder.newInstance(file, "\t").build());
         System.out.println(String.format("Number of cuts: %d in iterations %f",
                 cutGen.searchMinCuts(), cutGen.getNumIters()));
     }

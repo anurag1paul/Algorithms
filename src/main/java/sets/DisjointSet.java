@@ -11,11 +11,9 @@ public class DisjointSet {
 
     private static Logger logger = LoggerFactory.getLogger(DisjointSet.class);
 
-    private int size;
     private int[][] relationships;
 
     public DisjointSet(int size){
-        this.size = size;
         relationships = new int[size][2]; //0->parent, 1-> rank
 
         //initialise relationships
@@ -28,11 +26,9 @@ public class DisjointSet {
     public void union(int first, int second){
         int firstParent = find(first);
         int secondParent = find(second);
-        logger.info("FP:{} SP:{}", firstParent, secondParent);
 
         int firstParentRank = relationships[firstParent][1];
         int secondParentRank = relationships[secondParent][1];
-        logger.info("FPR:{} SPR:{}", firstParentRank, secondParentRank);
 
         if(firstParentRank == secondParentRank) { //same rank
             relationships[firstParent][1] += 1;
