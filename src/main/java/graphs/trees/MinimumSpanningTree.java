@@ -4,8 +4,10 @@ import graphs.Edge;
 import graphs.Graph;
 import sets.DisjointSet;
 
-import java.util.*;
-import java.util.AbstractMap.SimpleImmutableEntry;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
@@ -34,7 +36,7 @@ public class MinimumSpanningTree extends Tree {
 
         //generate sorted array of edges
         PriorityQueue<Edge> sortedGraphEdges= new PriorityQueue<>(Comparator.comparing(Edge::getWeight));
-        sortedGraphEdges.addAll(graph.getEdges());
+        sortedGraphEdges.addAll(graph.getAllEdges());
 
         while(!sortedGraphEdges.isEmpty()){
             Edge edge = sortedGraphEdges.poll();

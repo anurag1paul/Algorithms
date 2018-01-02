@@ -6,8 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sets.DisjointSet;
 
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -61,7 +62,7 @@ public class KargerMinCut {
         int generateMinCut() {
             int numVertices = graph.getNumVertices(), numEdges = graph.getNumEdges();
             List<Edge> edges = new ArrayList<>();
-            edges.addAll(graph.getEdges());
+            edges.addAll(graph.getAllEdges());
 
             DisjointSet disjointSet = new DisjointSet(numVertices);
 

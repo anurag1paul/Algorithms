@@ -6,7 +6,10 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
@@ -40,8 +43,12 @@ public class Graph {
         return adjacencyList;
     }
 
-    public Set<Edge> getEdges() {
+    public Set<Edge> getAllEdges() {
         return edges;
+    }
+
+    public List<Edge> getEdges(int vertex) {
+        return adjacencyList.get(vertex-1);
     }
 
     public void printGraph(){

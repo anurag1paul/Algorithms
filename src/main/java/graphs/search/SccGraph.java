@@ -1,4 +1,4 @@
-package graphs.scc;
+package graphs.search;
 
 import java.util.HashMap;
 import java.util.List;
