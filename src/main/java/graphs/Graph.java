@@ -18,11 +18,13 @@ public class Graph {
 
     final private int numVertices;
     final private int numEdges;
-    final private Map<Edge, Integer> edges;
+    final private List<List<Edge>> adjacencyList;
+    final private Set<Edge> edges;
 
     private Graph(Builder builder){
         numVertices = builder.numVertices;
         numEdges = builder.edges.size();
+        adjacencyList = builder.adjacencyList;
         edges = builder.edges;
     }
 
@@ -34,41 +36,61 @@ public class Graph {
         return numVertices;
     }
 
-    public Map<Edge, Integer> getEdges() {
+    public List<List<Edge>> getAdjacencyList() {
+        return adjacencyList;
+    }
+
+    public Set<Edge> getEdges() {
         return edges;
     }
 
     public void printGraph(){
         System.out.println(String.format("NumNodes:%d NumEdges:%d", numVertices, numEdges));
-        for(Edge edge: edges.keySet()){
-            System.out.println(edge);
+        for (int i = 0; i < adjacencyList.size(); i++) {
+            List<Edge> edges = adjacencyList.get(i);
+            System.out.println(i + " -> ");
+            for(Edge edge : edges)
+                System.out.print(edge);
         }
     }
 
     public static class Builder{
 
         int numVertices;
-        Map<Edge, Integer> edges = new HashMap<>();
+        List<List<Edge>> adjacencyList;
+        Set<Edge> edges = new HashSet<>();
 
         public static Builder newInstance(int numVertices){
             return new Builder(numVertices);
         }
 
-        public static Builder newInstance(String fileName, String sep){
-            return new Builder(fileName, sep);
+        public static Builder newInstance(String fileName, String sep, int numVertices){
+            return new Builder(fileName, sep, numVertices);
         }
 
         private Builder(int numVertices){
             this.numVertices = numVertices;
+            createAdjacencyList();
         }
 
-        private Builder(String fileName, String sep) {
-            numVertices = 0;
+        private Builder(String fileName, String sep, int numVertices) {
+            this.numVertices = numVertices;
+            createAdjacencyList();
             loadAdjacencyListGraphFromFile(fileName, sep);
         }
 
+        private void createAdjacencyList() {
+            adjacencyList = new ArrayList<>();
+            for(int i=0; i<numVertices; i++){
+                adjacencyList.add(new ArrayList<>());
+            }
+        }
+
         public void addEdge(int start, int end, int weight){
-            edges.put(new Edge(start, end), weight);
+            Edge edge = new Edge(start, end, weight);
+            adjacencyList.get(start-1).add(edge);
+            adjacencyList.get(end-1).add(edge);
+            edges.add(edge);
         }
 
         private void loadAdjacencyListGraphFromFile(String fileName, String sep) {
@@ -84,7 +106,6 @@ public class Graph {
                         addEdge(startNode, endNode, 0);
                     }
                     line = reader.readLine();
-                    numVertices++;
                 }
             }
             catch (IOException e) {

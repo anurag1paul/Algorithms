@@ -61,7 +61,7 @@ public class KargerMinCut {
         int generateMinCut() {
             int numVertices = graph.getNumVertices(), numEdges = graph.getNumEdges();
             List<Edge> edges = new ArrayList<>();
-            edges.addAll(graph.getEdges().keySet());
+            edges.addAll(graph.getEdges());
 
             DisjointSet disjointSet = new DisjointSet(numVertices);
 

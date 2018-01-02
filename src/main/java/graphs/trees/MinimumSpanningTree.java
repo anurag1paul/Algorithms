@@ -4,11 +4,8 @@ import graphs.Edge;
 import graphs.Graph;
 import sets.DisjointSet;
 
+import java.util.*;
 import java.util.AbstractMap.SimpleImmutableEntry;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
 
 /**
  * @author Anurag Paul(anurag.paul@delhivery.com)
@@ -18,7 +15,7 @@ public class MinimumSpanningTree extends Tree {
 
     private double weight;
 
-    private Map<Edge, Integer> edges = new HashMap<>();
+    private Set<Edge> edges = new HashSet<>();
 
     public MinimumSpanningTree(Graph graph) {
         generateMST(this, graph);
@@ -28,7 +25,7 @@ public class MinimumSpanningTree extends Tree {
         return weight;
     }
 
-    public Map<Edge, Integer> getEdges() {
+    public Set<Edge> getEdges() {
         return edges;
     }
 
@@ -36,21 +33,19 @@ public class MinimumSpanningTree extends Tree {
         DisjointSet disjointSet = new DisjointSet(graph.getNumVertices());
 
         //generate sorted array of edges
-        PriorityQueue<Map.Entry<Edge, Integer>>
-                sortedGraphEdges= new PriorityQueue<>(Comparator.comparing(Map.Entry::getValue));
-        sortedGraphEdges.addAll(graph.getEdges().entrySet());
+        PriorityQueue<Edge> sortedGraphEdges= new PriorityQueue<>(Comparator.comparing(Edge::getWeight));
+        sortedGraphEdges.addAll(graph.getEdges());
 
         while(!sortedGraphEdges.isEmpty()){
-            Map.Entry<Edge, Integer> weightedEdge = sortedGraphEdges.poll();
-            Edge edge = weightedEdge.getKey();
+            Edge edge = sortedGraphEdges.poll();
 
-            int firstParent = disjointSet.find(edge.src);
-            int secondParent = disjointSet.find(edge.dst);
+            int firstParent = disjointSet.find(edge.src - 1);
+            int secondParent = disjointSet.find(edge.dst - 1);
 
             if(firstParent != secondParent){
                 disjointSet.union(firstParent, secondParent);
-                mst.weight += weightedEdge.getValue();
-                mst.edges.put(weightedEdge.getKey(), weightedEdge.getValue());
+                mst.weight += edge.getWeight();
+                mst.edges.add(edge);
             }
         }
     }

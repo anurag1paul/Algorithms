@@ -6,10 +6,22 @@ public class Edge {
 
     public final int src;
     public final int dst;
+    private final double weight;
+
+    Edge(int src, int dst, double weight){
+        this.src = src;
+        this.dst = dst;
+        this.weight = weight;
+    }
 
     Edge(int src, int dst){
         this.src = src;
         this.dst = dst;
+        this.weight = 0;
+    }
+
+    public double getWeight() {
+        return weight;
     }
 
     @Override
