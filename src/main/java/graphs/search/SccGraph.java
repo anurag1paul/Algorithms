@@ -61,9 +61,7 @@ public class SccGraph {
 
         for(Edge edge: graph.getAllEdges())
             builder.addEdge(finishingTimes[edge.src-1], finishingTimes[edge.dst-1], 0);
-        graph = null;
 
-        Runtime.getRuntime().gc();
         graph = builder.build();
     }
 
