@@ -108,6 +108,7 @@ public class Graph {
             }
             catch (IOException e) {
                 logger.error("File Load Error", e);
+                System.exit(1);
             }
 
             return this;

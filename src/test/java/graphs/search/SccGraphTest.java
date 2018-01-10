@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static jdk.nashorn.internal.objects.NativeMath.min;
+
 public class SccGraphTest {
 
     private Graph getGraph() {
@@ -43,7 +45,7 @@ public class SccGraphTest {
     }
 
     @Test
-    public void basicTest(){
+    public void baseTest(){
 
         SccGraph sccGraph = new SccGraph(getGraph());
 
@@ -59,18 +61,52 @@ public class SccGraphTest {
     }
 
     @Test
+    public void basicTest1(){
+        SccGraph sccGraph = new SccGraph("data/SCCtest1.txt", " ", 9);
+        sccGraph.execute();
+        Map<Integer, Long> allScc = sccGraph.getAllScc();
+        List<Long> scc = new LinkedList<>();
+        scc.addAll(allScc.values());
+        scc.sort(Collections.reverseOrder());
+        for(int i=0; i<min(5, scc.size()); i++)
+            Assert.assertEquals(3L, (long)scc.get(i));
+    }
+
+    @Test
+    public void basicTest2(){
+        SccGraph sccGraph = new SccGraph("data/SCCtest2.txt", " ", 8);
+        sccGraph.execute();
+        Map<Integer, Long> allScc = sccGraph.getAllScc();
+        List<Long> scc = new LinkedList<>();
+        scc.addAll(allScc.values());
+        scc.sort(Collections.reverseOrder());
+        long[] expected = {7,1};
+        for(int i=0; i<min(5, scc.size()); i++)
+            Assert.assertEquals(expected[i], (long)scc.get(i));
+    }
+
+    @Test
+    public void basicTest3(){
+        SccGraph sccGraph = new SccGraph("data/SCCtest3.txt", " ", 12);
+        sccGraph.execute();
+        Map<Integer, Long> allScc = sccGraph.getAllScc();
+        List<Long> scc = new LinkedList<>();
+        scc.addAll(allScc.values());
+        scc.sort(Collections.reverseOrder());
+        long[] expected = {6,3,2,1};
+        for(int i=0; i<min(5, scc.size()); i++)
+            Assert.assertEquals(expected[i], (long)scc.get(i));
+    }
+
+    @Test
     public void advancedTest(){
         SccGraph sccGraph = new SccGraph("data/SCC.txt", " ", 875714);
         sccGraph.execute();
         Map<Integer, Long> allScc = sccGraph.getAllScc();
-        for(Map.Entry<Integer, Long> entry: allScc.entrySet()){
-            System.out.println(entry.getKey() + "-> " + entry.getValue());
-        }
-
         List<Long> scc = new LinkedList<>();
         scc.addAll(allScc.values());
         scc.sort(Collections.reverseOrder());
         for(int i=0; i<5; i++)
-            System.out.print(scc.get(i) + ",");
+            System.out.print(scc.get(i) + ","); //434821,968,459,313,211,
     }
 }

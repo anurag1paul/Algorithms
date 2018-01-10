@@ -44,6 +44,7 @@ public class SccGraph {
         explored = new boolean[numVertices];
         leaders = new Integer[numVertices];
         finishingTimes = new int[numVertices];
+        leader = 0;
     }
 
     public void execute(){
@@ -59,8 +60,10 @@ public class SccGraph {
     private void updateGraph() {
         Graph.Builder builder = Graph.Builder.newInstance(numVertices);
 
-        for(Edge edge: graph.getAllEdges())
-            builder.addEdge(finishingTimes[edge.src-1], finishingTimes[edge.dst-1], 0);
+        for(int i=1; i<=numVertices; i++) {
+            for(Edge edge: graph.getEdges(i))
+                builder.addEdge(finishingTimes[edge.src - 1], finishingTimes[edge.dst - 1], 0);
+        }
 
         graph = builder.build();
     }
@@ -76,7 +79,6 @@ public class SccGraph {
     }
 
     private void DFS(Graph graph, int node, boolean forward) {
-
         explored[node-1] = true;
         leaders[node-1] = leader;
 
@@ -97,6 +99,10 @@ public class SccGraph {
 
     public int[] getFinishingTimes() {
         return finishingTimes;
+    }
+
+    public Integer[] getLeaders() {
+        return leaders;
     }
 
     public Map<Integer, Long> getAllScc(){

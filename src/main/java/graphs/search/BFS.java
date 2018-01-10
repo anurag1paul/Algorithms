@@ -3,6 +3,7 @@ package graphs.search;
 import graphs.Edge;
 import graphs.Graph;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -18,8 +19,8 @@ public class BFS {
         Queue<Integer> toBeVisited = new LinkedList<>();
         toBeVisited.offer(startVertex);
 
-        List<Integer> explored = new LinkedList<>();
-        explored.add(startVertex);
+        boolean[] explored = new boolean[graph.getNumVertices()];
+        List<Integer> exploredList = new ArrayList<>();
 
         while(!toBeVisited.isEmpty()) {
 
@@ -29,13 +30,14 @@ public class BFS {
 
                 int newVertex = edge.dst;
 
-                if(!explored.contains(newVertex)) {
+                if(!explored[newVertex]) {
                     toBeVisited.offer(newVertex);
-                    explored.add(newVertex);
+                    explored[newVertex] = true;
+                    exploredList.add(newVertex);
                 }
             }
         }
 
-        return explored;
+        return exploredList;
     }
 }
