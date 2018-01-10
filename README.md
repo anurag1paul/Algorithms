@@ -10,6 +10,9 @@ I study them form various books and online sources.
     - Counting Inversions
     - Quick Sort
     - Randomized and Deterministic Selection
+    
 - Graph based Data Structures and Algorithms
     - Minimum Spanning Tree Implementation
     - Karger's Min Cut Algorithm
+    - Breadth First Search
+    - Kosaraju's algorithm for Strongly Connected Components

@@ -55,35 +55,26 @@ public class Graph {
         System.out.println(String.format("NumNodes:%d NumEdges:%d", numVertices, numEdges));
         for (int i = 0; i < adjacencyList.size(); i++) {
             List<Edge> edges = adjacencyList.get(i);
-            System.out.println(i + " -> ");
+            System.out.print((i+1) + " -> ");
             for(Edge edge : edges)
                 System.out.print(edge);
+            System.out.println();
         }
     }
 
     public static class Builder{
 
-        int numVertices;
-        List<List<Edge>> adjacencyList;
-        Set<Edge> edges = new HashSet<>();
+        private int numVertices;
+        private List<List<Edge>> adjacencyList;
+        private Set<Edge> edges = new HashSet<>();
 
         public static Builder newInstance(int numVertices){
             return new Builder(numVertices);
         }
 
-        public static Builder newInstance(String fileName, String sep, int numVertices){
-            return new Builder(fileName, sep, numVertices);
-        }
-
         private Builder(int numVertices){
             this.numVertices = numVertices;
             createAdjacencyList();
-        }
-
-        private Builder(String fileName, String sep, int numVertices) {
-            this.numVertices = numVertices;
-            createAdjacencyList();
-            loadAdjacencyListGraphFromFile(fileName, sep);
         }
 
         private void createAdjacencyList() {
@@ -100,7 +91,7 @@ public class Graph {
             edges.add(edge);
         }
 
-        private void loadAdjacencyListGraphFromFile(String fileName, String sep) {
+        public Builder loadAdjacencyListGraphFromFile(String fileName, String sep) {
 
             try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
                 String line = reader.readLine();
@@ -118,6 +109,8 @@ public class Graph {
             catch (IOException e) {
                 logger.error("File Load Error", e);
             }
+
+            return this;
         }
 
         public Graph build(){
