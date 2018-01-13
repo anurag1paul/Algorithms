@@ -1,8 +1,8 @@
 package graphs.trees;
 
+import dataStructures.DisjointSet;
 import graphs.Edge;
 import graphs.Graph;
-import dataStructures.DisjointSet;
 
 import java.util.Comparator;
 import java.util.HashSet;

@@ -17,3 +17,6 @@ I study them form various books and online sources.
     - Breadth First Search
     - Kosaraju's algorithm for Strongly Connected Components
     - Djikstra's Shortest Path Algorithm (using Priority Queue or Heap)
+
+- Heap Application
+    - Median Maintenance Algorithm
