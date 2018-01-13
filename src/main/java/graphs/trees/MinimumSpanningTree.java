@@ -2,7 +2,7 @@ package graphs.trees;
 
 import graphs.Edge;
 import graphs.Graph;
-import sets.DisjointSet;
+import dataStructures.DisjointSet;
 
 import java.util.Comparator;
 import java.util.HashSet;

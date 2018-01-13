@@ -16,3 +16,4 @@ I study them form various books and online sources.
     - Karger's Min Cut Algorithm
     - Breadth First Search
     - Kosaraju's algorithm for Strongly Connected Components
+    - Djikstra's Shortest Path Algorithm (using Priority Queue or Heap)

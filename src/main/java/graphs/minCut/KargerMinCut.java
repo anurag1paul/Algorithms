@@ -4,7 +4,7 @@ import graphs.Edge;
 import graphs.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sets.DisjointSet;
+import dataStructures.DisjointSet;
 
 import java.util.ArrayList;
 import java.util.List;

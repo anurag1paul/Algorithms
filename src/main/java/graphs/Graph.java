@@ -100,8 +100,10 @@ public class Graph {
                     String[] elements = line.split(sep);
                     int startNode = Integer.parseInt(elements[0]);
                     for(int i=1; i< elements.length; i++) {
-                        int endNode = Integer.parseInt(elements[i]);
-                        addEdge(startNode, endNode, 0);
+                        String[] weightedEdge = elements[i].split(",");
+                        int endNode = Integer.parseInt(weightedEdge[0]);
+                        int weight = weightedEdge.length > 1 ? Integer.parseInt(weightedEdge[1]) : 0;
+                        addEdge(startNode, endNode, weight);
                     }
                     line = reader.readLine();
                 }
