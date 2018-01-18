@@ -35,34 +35,34 @@ public class DjikstraShortestPath {
 
         double distance, oldDistance;
 
+        int lastVisited = startNode;
+
         while(visitedSet.size() != numVertices) {
 
-            for(Integer v: visitedSet) {
-                for(Edge edge: graph.getEdges(v)) {
-                    if(edge.src == v && !visited[edge.dst]) {
+            for(Edge edge: graph.getEdges(lastVisited)) {
+                if(edge.src == lastVisited && !visited[edge.dst]) {
 
-                        distance = shortestLengths[v] + edge.getWeight();
+                    distance = shortestLengths[lastVisited] + edge.getWeight();
 
-                        if(callback.containsKey(edge.dst)) {
-                            oldDistance = callback.get(edge.dst).getValue();
-                            if(distance < oldDistance) {
-                                toBeVisited.remove(callback.get(edge.dst));
-                            }else
-                                continue;
-                        }
-
-                        Map.Entry<Integer, Double> newEntry = new AbstractMap.SimpleEntry<>(edge.dst, distance);
-                        callback.put(edge.dst, newEntry);
-                        toBeVisited.offer(newEntry);
+                    if(callback.containsKey(edge.dst)) {
+                        oldDistance = callback.get(edge.dst).getValue();
+                        if(distance < oldDistance) {
+                            toBeVisited.remove(callback.get(edge.dst));
+                        }else
+                            continue;
                     }
+
+                    Map.Entry<Integer, Double> newEntry = new AbstractMap.SimpleEntry<>(edge.dst, distance);
+                    callback.put(edge.dst, newEntry);
+                    toBeVisited.offer(newEntry);
                 }
             }
 
             Map.Entry<Integer, Double> nextVisit = toBeVisited.poll();
-            int nextNode = nextVisit.getKey();
-            visited[nextNode] = true;
-            visitedSet.add(nextNode);
-            shortestLengths[nextNode] = nextVisit.getValue();
+            lastVisited = nextVisit.getKey();
+            visited[lastVisited] = true;
+            visitedSet.add(lastVisited);
+            shortestLengths[lastVisited] = nextVisit.getValue();
         }
 
         return shortestLengths;
