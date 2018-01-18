@@ -6,9 +6,9 @@ import org.junit.Test;
 
 /**
  * @author Anurag Paul
- *         Date: 23/6/17
+ *         Date: 18/1/18
  */
-public class MinimumSpanningTreeTest {
+public class PrimsMSTAlgoTest {
 
     @Test
     public void test() {
@@ -28,7 +28,21 @@ public class MinimumSpanningTreeTest {
 
         Graph graph = builder.build();
 
-        MinimumSpanningTree tree = new MinimumSpanningTree(graph);
+        MinimumSpanningTree tree = new PrimsMSTAlgo(graph);
+        tree.generateMST();
         Assert.assertEquals(39, tree.getWeight(), 0.00001);
+    }
+
+    @Test
+    public void advancedTest(){
+        String fileName = "data/edges.txt";
+        String sep = " ";
+        int numVertices = 500;
+        int numEdges = 2184;
+
+        Graph graph = Graph.Builder.newInstance(numVertices).loadEdgesListGraphFromFile(fileName, sep).build();
+        MinimumSpanningTree tree = new PrimsMSTAlgo(graph);
+        double weight = tree.generateMST();
+        Assert.assertEquals(-3612829.0, tree.getWeight(), 0.00001);
     }
 }

@@ -116,6 +116,28 @@ public class Graph {
             return this;
         }
 
+        public Builder loadEdgesListGraphFromFile(String fileName, String sep) {
+
+            try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
+                String line = reader.readLine();
+
+                while(line != null){
+                    String[] elements = line.split(sep);
+                    int startNode = Integer.parseInt(elements[0]);
+                    int endNode = Integer.parseInt(elements[1]);
+                    int weight = Integer.parseInt(elements[2]);
+                    addEdge(startNode, endNode, weight);
+                    line = reader.readLine();
+                }
+            }
+            catch (IOException e) {
+                logger.error("File Load Error", e);
+                System.exit(1);
+            }
+
+            return this;
+        }
+
         public Graph build(){
             return new Graph(this);
         }

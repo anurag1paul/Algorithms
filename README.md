@@ -12,11 +12,13 @@ I study them form various books and online sources.
     - Randomized and Deterministic Selection
     
 - Graph based Data Structures and Algorithms
-    - Minimum Spanning Tree Implementation
     - Karger's Min Cut Algorithm
     - Breadth First Search
     - Kosaraju's algorithm for Strongly Connected Components
     - Djikstra's Shortest Path Algorithm (using Priority Queue or Heap)
+    - Minimum Spanning Tree Implementation (Prim and Kruskal)
 
-- Heap Application
+- Applications
     - Median Maintenance Algorithm
+    - Two-Sum Problem
+    - Greedy Algorithm based Job Scheduling
