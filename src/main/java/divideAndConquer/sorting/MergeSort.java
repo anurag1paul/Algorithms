@@ -1,7 +1,7 @@
 package divideAndConquer.sorting;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 14/11/17
  *         Runtime: O(n log(n))
  */

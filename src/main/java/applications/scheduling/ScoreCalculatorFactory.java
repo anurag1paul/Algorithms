@@ -1,7 +1,7 @@
 package applications.scheduling;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 18/1/18
  */
 public class ScoreCalculatorFactory {

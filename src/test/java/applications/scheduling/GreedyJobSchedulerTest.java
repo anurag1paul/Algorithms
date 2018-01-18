@@ -7,7 +7,7 @@ import static applications.scheduling.ScoreCalculatorFactory.ScoreType.DIFFERENC
 import static applications.scheduling.ScoreCalculatorFactory.ScoreType.RATIO_BASED;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 18/1/18
  */
 public class GreedyJobSchedulerTest {

@@ -4,6 +4,10 @@ import graphs.Graph;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class KargerMinCutTest {
 
     @Test

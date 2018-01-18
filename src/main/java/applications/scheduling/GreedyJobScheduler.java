@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 18/1/18
  */
 public class GreedyJobScheduler {

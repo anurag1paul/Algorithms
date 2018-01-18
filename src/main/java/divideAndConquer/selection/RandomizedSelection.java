@@ -4,7 +4,7 @@ import static java.lang.Math.random;
 import static utils.utils.swap;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 1/12/17
  */
 public class RandomizedSelection {

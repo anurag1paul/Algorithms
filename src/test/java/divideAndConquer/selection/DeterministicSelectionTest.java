@@ -6,6 +6,10 @@ import org.junit.Test;
 import static divideAndConquer.selection.DeterministicSelection.getOrderStatistic;
 import static utils.utils.printArray;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class DeterministicSelectionTest {
 
     @Test

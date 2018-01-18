@@ -14,6 +14,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class KargerMinCut {
 
     private Graph initialGraph;

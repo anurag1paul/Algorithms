@@ -3,7 +3,7 @@ package divideAndConquer.multiplication;
 import java.math.BigInteger;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 17/11/17
  */
 public class KaratsubaAlgorithm {

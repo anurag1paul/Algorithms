@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import static divideAndConquer.selection.RandomizedSelection.getOrderStatistic;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class RandomizedSelectionTest {
 
     @Test

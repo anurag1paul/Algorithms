@@ -3,6 +3,10 @@ package divideAndConquer.sorting;
 import static divideAndConquer.sorting.QuickSort.PivotType.FIRST;
 import static utils.utils.swap;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class QuickSort {
 
     public static enum PivotType{

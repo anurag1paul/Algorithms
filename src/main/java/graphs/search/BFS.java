@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 2/1/18
  */
 public class BFS {

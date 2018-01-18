@@ -2,6 +2,10 @@ package graphs;
 
 import java.util.Objects;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class Edge {
 
     public final int src;

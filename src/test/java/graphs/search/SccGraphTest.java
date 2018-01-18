@@ -8,6 +8,10 @@ import java.util.*;
 
 import static jdk.nashorn.internal.objects.NativeMath.min;
 
+/**
+ * @author Anurag Paul
+ *         Date: 13/1/18
+ */
 public class SccGraphTest {
 
     private Graph getGraph() {

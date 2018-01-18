@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import static java.lang.Math.abs;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 13/1/18
  */
 public class MedianMaintenanceAlgorithm {

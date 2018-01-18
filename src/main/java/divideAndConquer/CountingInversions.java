@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 22/11/17
  * The purpose of this class is to count the number of inversions in an input array
  * By inversion, we mean that how many smaller elements than the current element

@@ -13,7 +13,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * @author Anurag Paul(anurag.paul@delhivery.com)
+ * @author Anurag Paul
  *         Date: 15/1/18
  * To compute the number of target values t in the given interval (inclusive)
  * such that there are distinct numbers x,y in the input file that satisfy x+y=t.
