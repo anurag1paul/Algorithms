@@ -23,20 +23,28 @@ public class DisjointSet {
         }
     }
 
-    public void union(int first, int second){
+    public int union(int first, int second){
         int firstParent = find(first);
         int secondParent = find(second);
 
         int firstParentRank = relationships[firstParent][1];
         int secondParentRank = relationships[secondParent][1];
 
+        int absorbed;
+
         if(firstParentRank == secondParentRank) { //same rank
             relationships[firstParent][1] += 1;
             relationships[secondParent][0] = firstParent;
+            absorbed = secondParent;
         }else if(firstParentRank > secondParentRank){
             relationships[secondParent][0] = firstParent;
-        } else
+            absorbed = secondParent;
+        } else {
             relationships[firstParent][0] = secondParent;
+            absorbed = firstParent;
+        }
+
+        return absorbed;
     }
 
     public int find(int member){

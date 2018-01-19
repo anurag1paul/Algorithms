@@ -43,6 +43,6 @@ public class PrimsMSTAlgoTest {
         Graph graph = Graph.Builder.newInstance(numVertices).loadEdgesListGraphFromFile(fileName, sep).build();
         MinimumSpanningTree tree = new PrimsMSTAlgo(graph);
         double weight = tree.generateMST();
-        Assert.assertEquals(-3612829.0, tree.getWeight(), 0.00001);
+        Assert.assertEquals(-3612829.0, weight, 0.00001);
     }
 }
