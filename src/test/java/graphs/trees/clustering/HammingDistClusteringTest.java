@@ -12,7 +12,7 @@ public class HammingDistClusteringTest {
     @Test
     public void advancedTest(){
         String fileName = "data/clustering_big.txt";
-        HammingDistClustering clustering = new HammingDistClustering(fileName, 3);
+        HammingDistClustering clustering = new HammingDistClustering(fileName);
         Assert.assertEquals(6118, clustering.getNumClusters());
     }
 }

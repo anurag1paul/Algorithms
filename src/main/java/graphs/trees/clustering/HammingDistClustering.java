@@ -18,15 +18,12 @@ import java.util.*;
 public class HammingDistClustering {
 
     private static final Logger logger = LoggerFactory.getLogger(HammingDistClustering.class);
-    private final int maxDistance;
     private int numVertices;
     private int numBits;
     private Map<String, Integer> data = new HashMap<>();
     private Graph graph;
 
-    public HammingDistClustering(String fileName, int maxDistance){
-
-        this.maxDistance = maxDistance;
+    public HammingDistClustering(String fileName){
 
         try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
             String line = reader.readLine();
@@ -52,6 +49,9 @@ public class HammingDistClustering {
         createGraph();
     }
 
+    /**
+     * Creates a graph with edges <3 hamming distance
+     */
     private void createGraph(){
 
         Graph.Builder builder = Graph.Builder.newInstance(numVertices);
@@ -93,6 +93,11 @@ public class HammingDistClustering {
         return builder;
     }
 
+    /**
+     * Counts the number of connected components in the graph with <3 hamming distance,
+     * thereby giving the number of clusters of <3 hamming distance
+     * @return number of clusters of <3 hamming distance
+     */
     public int getNumClusters(){
         ConnectedComponents cc = new ConnectedComponents(graph);
         return cc.getNumConnectedComponents();
