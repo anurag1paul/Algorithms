@@ -24,3 +24,7 @@ I study them form various books and online sources.
     - Greedy Algorithm based Job Scheduling
     - Kruskal's MST inspired Simple Clustering
     - Hamming Distance based Clustering
+    - Huffman Codes
+    
+- Dynamic Programming
+    - Max Weight Independent Set in Path Graphs
