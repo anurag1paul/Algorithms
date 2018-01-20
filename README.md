@@ -28,3 +28,4 @@ I study them form various books and online sources.
     
 - Dynamic Programming
     - Max Weight Independent Set in Path Graphs
+    - Knapsack Problem
