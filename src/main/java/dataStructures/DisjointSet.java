@@ -51,7 +51,9 @@ public class DisjointSet {
         int parent = relationships[member][0];
         if(parent == member)
             return member;
-        else
-            return find(parent);
+        else {
+            relationships[member][0] = find(parent);
+            return relationships[member][0];
+        }
     }
 }

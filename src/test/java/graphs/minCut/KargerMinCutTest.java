@@ -2,6 +2,7 @@ package graphs.minCut;
 
 import graphs.Graph;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -43,7 +44,7 @@ public class KargerMinCutTest {
         Assert.assertEquals(1, cutGen.searchMinCuts());
 
         //test5
-        graph = Graph.Builder.newInstance(8)
+        graph = Graph.Builder.newInstance(40)
                 .loadAdjacencyListGraphFromFile(base + "5.txt", " ")
                 .build();
         cutGen = new KargerMinCut(graph);

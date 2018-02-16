@@ -101,7 +101,7 @@ public class KargerMinCut {
                     cutEdges++;
             }
 
-            logger.info("Count:{} minCut:{}", count.incrementAndGet(), cutEdges);
+            logger.debug("Count:{} minCut:{}", count.incrementAndGet(), cutEdges);
             return cutEdges;
         }
 
