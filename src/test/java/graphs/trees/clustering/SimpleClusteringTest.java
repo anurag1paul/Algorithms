@@ -12,7 +12,7 @@ public class SimpleClusteringTest {
 
     @Test
     public void basicTest(){
-        Graph graph = Graph.Builder.newInstance(12).loadEdgesListGraphFromFile("data/clustering1_test.txt", " ").build();
+        Graph graph = Graph.Builder.newInstance(12).loadEdgesListGraphFromFile("data/clustering1_test.txt", " ", false).build();
         SimpleClustering clustering = new SimpleClustering(graph);
         double spacing = clustering.cluster(4);
         Assert.assertEquals(99.0, spacing, 0.0001);
@@ -20,7 +20,7 @@ public class SimpleClusteringTest {
 
     @Test
     public void advancedTest(){
-        Graph graph = Graph.Builder.newInstance(500).loadEdgesListGraphFromFile("data/clustering1.txt", " ").build();
+        Graph graph = Graph.Builder.newInstance(500).loadEdgesListGraphFromFile("data/clustering1.txt", " ", false).build();
         SimpleClustering clustering = new SimpleClustering(graph);
         double spacing = clustering.cluster(4);
         Assert.assertEquals(106.0, spacing, 0.0001);

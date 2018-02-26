@@ -42,6 +42,6 @@ public class Edge {
 
     @Override
     public String toString() {
-        return String.format("(%d,%d)",src, dst);
+        return String.format("(%d,%d,%f)",src, dst, weight);
     }
 }

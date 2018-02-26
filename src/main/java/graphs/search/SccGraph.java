@@ -30,7 +30,7 @@ public class SccGraph {
     public SccGraph(String file, String sep, int numVertices){
 
         this.numVertices = numVertices;
-        graph = Graph.Builder.newInstance(numVertices).loadAdjacencyListGraphFromFile(file, sep).build();
+        graph = Graph.Builder.newInstance(numVertices).loadAdjacencyListGraphFromFile(file, sep, false).build();
     }
 
     public SccGraph(Graph graph) {

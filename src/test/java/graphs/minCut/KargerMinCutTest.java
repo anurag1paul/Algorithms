@@ -17,35 +17,35 @@ public class KargerMinCutTest {
 
         //test1
         Graph graph = Graph.Builder.newInstance(8)
-                                    .loadAdjacencyListGraphFromFile(base + "1.txt", " ")
+                                    .loadAdjacencyListGraphFromFile(base + "1.txt", " ", false)
                                     .build();
         KargerMinCut cutGen = new KargerMinCut(graph);
         Assert.assertEquals(2, cutGen.searchMinCuts());
 
         //test2
         graph = Graph.Builder.newInstance(8)
-                .loadAdjacencyListGraphFromFile(base + "2.txt", " ")
+                .loadAdjacencyListGraphFromFile(base + "2.txt", " ", false)
                 .build();
         cutGen = new KargerMinCut(graph);
         Assert.assertEquals(2, cutGen.searchMinCuts());
 
         //test3
         graph = Graph.Builder.newInstance(8)
-                .loadAdjacencyListGraphFromFile(base + "3.txt", " ")
+                .loadAdjacencyListGraphFromFile(base + "3.txt", " ", false)
                 .build();
         cutGen = new KargerMinCut(graph);
         Assert.assertEquals(1, cutGen.searchMinCuts());
 
         //test4
         graph = Graph.Builder.newInstance(8)
-                .loadAdjacencyListGraphFromFile(base + "4.txt", " ")
+                .loadAdjacencyListGraphFromFile(base + "4.txt", " ", false)
                 .build();
         cutGen = new KargerMinCut(graph);
         Assert.assertEquals(1, cutGen.searchMinCuts());
 
         //test5
         graph = Graph.Builder.newInstance(40)
-                .loadAdjacencyListGraphFromFile(base + "5.txt", " ")
+                .loadAdjacencyListGraphFromFile(base + "5.txt", " ", false)
                 .build();
         cutGen = new KargerMinCut(graph);
         Assert.assertEquals(3, cutGen.searchMinCuts());
@@ -57,7 +57,7 @@ public class KargerMinCutTest {
 
         //test1
         Graph graph = Graph.Builder.newInstance(200)
-                .loadAdjacencyListGraphFromFile(file, "\t")
+                .loadAdjacencyListGraphFromFile(file, "\t", false)
                 .build();
         KargerMinCut cutGen = new KargerMinCut(graph);
         System.out.println(String.format("Number of cuts: %d in iterations %f",

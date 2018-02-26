@@ -84,17 +84,24 @@ public class Graph {
             }
         }
 
-        public void addEdge(int start, int end, int weight){
+        public void addEdge(int start, int end, double weight){
             Edge edge = new Edge(start, end, weight);
-            adjacencyList.get(start-1).add(edge);
-            adjacencyList.get(end-1).add(edge);
+            addEdge(edge);
+        }
+
+        public void addEdge(Edge edge) {
+            adjacencyList.get(edge.src-1).add(edge);
+            adjacencyList.get(edge.dst-1).add(edge);
             edges.add(edge);
         }
 
-        public Builder loadAdjacencyListGraphFromFile(String fileName, String sep) {
+        public Builder loadAdjacencyListGraphFromFile(String fileName, String sep, boolean header) {
 
             try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
                 String line = reader.readLine();
+
+                if(header)
+                    line = reader.readLine();
 
                 while(line != null){
                     String[] elements = line.split(sep);
@@ -116,10 +123,13 @@ public class Graph {
             return this;
         }
 
-        public Builder loadEdgesListGraphFromFile(String fileName, String sep) {
+        public Builder loadEdgesListGraphFromFile(String fileName, String sep, boolean header) {
 
             try(BufferedReader reader = new BufferedReader(new FileReader(fileName))){
                 String line = reader.readLine();
+
+                if(header)
+                    line = reader.readLine();
 
                 while(line != null){
                     String[] elements = line.split(sep);
