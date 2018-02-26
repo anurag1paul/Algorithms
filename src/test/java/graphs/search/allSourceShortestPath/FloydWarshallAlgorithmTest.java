@@ -8,15 +8,15 @@ import org.junit.Test;
  * @author Anurag Paul
  * Date: 26/2/18
  */
-public class JohnsonsAlgorithmTest {
+public class FloydWarshallAlgorithmTest {
 
     @Test
     public void basicTest() {
         String file = "data/shortestPaths/test1.txt";
         Graph graph = Graph.Builder.newInstance(8).loadEdgesListGraphFromFile(file, " ", true).build();
-        JohnsonsAlgorithm johnsonsAlgorithm = new JohnsonsAlgorithm(graph);
+        FloydWarshallAlgorithm floydWarshallAlgorithm = new FloydWarshallAlgorithm(graph);
 
-        Assert.assertEquals(-41, johnsonsAlgorithm.getShortestShortestPath(), 0.001);
+        Assert.assertEquals(-41, floydWarshallAlgorithm.getShortestShortestPath(), 0.001);
     }
 
     @Test
@@ -26,10 +26,10 @@ public class JohnsonsAlgorithmTest {
 
         for(String file: files) {
             Graph graph = Graph.Builder.newInstance(1000).loadEdgesListGraphFromFile(file, " ", true).build();
-            JohnsonsAlgorithm johnsonsAlgorithm = new JohnsonsAlgorithm(graph);
+            FloydWarshallAlgorithm floydWarshallAlgorithm = new FloydWarshallAlgorithm(graph);
 
             try {
-                double minPath = johnsonsAlgorithm.getShortestShortestPath();
+                double minPath = floydWarshallAlgorithm.getShortestShortestPath();
                 if(minPath < shortestShortestPath)
                     shortestShortestPath = minPath;
             }catch (RuntimeException e) {
@@ -44,7 +44,7 @@ public class JohnsonsAlgorithmTest {
     public void largeProblemTest(){
         String file = "data/shortestPaths/large.txt";
         Graph graph = Graph.Builder.newInstance(20000).loadEdgesListGraphFromFile(file, " ", true).build();
-        JohnsonsAlgorithm johnsonsAlgorithm = new JohnsonsAlgorithm(graph);
-        System.out.println(johnsonsAlgorithm.getShortestShortestPath());
+        FloydWarshallAlgorithm floydWarshallAlgorithm = new FloydWarshallAlgorithm(graph);
+        System.out.println(floydWarshallAlgorithm.getShortestShortestPath());
     }
 }
