@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public abstract class TravelingSalesmanProblem {
 
     private static Logger logger = LoggerFactory.getLogger(TravelingSalesmanProblem.class);
 
-    private static class City {
+    public static class City {
         double x;
         double y;
 
@@ -26,11 +25,16 @@ public abstract class TravelingSalesmanProblem {
             this.x = x;
             this.y = y;
         }
+
+        @Override
+        public String toString() {
+            return String.format("(%f, %f)" ,x ,y);
+        }
     }
 
-    private int numCities;
-    private List<City> cities = new ArrayList<>();
-    private double[][] matrix;
+    protected int numCities;
+    protected List<City> cities = new ArrayList<>();
+    protected double[][] matrix;
 
     public TravelingSalesmanProblem(String fileName, String sep) {
 
@@ -41,7 +45,7 @@ public abstract class TravelingSalesmanProblem {
             while(line != null){
                 String[] elements = line.split(sep);
                 double x = Double.parseDouble(elements[0]);
-                double y = Double.parseDouble(elements[0]);
+                double y = Double.parseDouble(elements[1]);
                 cities.add(new City(x, y));
                 line = reader.readLine();
             }
@@ -55,17 +59,20 @@ public abstract class TravelingSalesmanProblem {
 
     public abstract double getTour();
 
-    private double[][] getDistanceMatrix() {
+    protected double[][] getDistanceMatrix() {
+
         double[][] matrix = new double[numCities][numCities];
+
         for(int i=0; i<numCities; i++) {
             for(int j=i+1; j<numCities; j++) {
                 matrix[i][j] = matrix[j][i] = getDistance(cities.get(i), cities.get(j));
             }
         }
+
         return matrix;
     }
 
-    private double getDistance(City origin, City destination) {
+    protected double getDistance(City origin, City destination) {
         return Math.sqrt(Math.pow((origin.x - destination.x), 2) + Math.pow((origin.y - destination.y), 2));
     }
 }

@@ -2,7 +2,10 @@ package utils;
 
 import org.junit.Test;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Anurag Paul
@@ -12,8 +15,19 @@ public class CombinationsTest {
 
     @Test
     public void test(){
-        for(List<Integer> c : Combinations.nChooseR(10,2)){
+        for(Set<Integer> c : Combinations.nChooseR(10,2)){
             System.out.println(c);
         }
+    }
+
+    @Test
+    public void newTest() {
+        Set<Integer> a = new HashSet<>();
+        a.add(1);
+        Map<Set, Integer> map = new HashMap<>();
+        map.put(a, 1);
+        a = new HashSet<>();
+        a.add(1);
+        System.out.println(map.get(a));
     }
 }

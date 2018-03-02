@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class DynamicProgrammingTspTest {
 
-    String base_file = "data/tsp/";
+    private String base_file = "data/tsp/";
 
     @Test
     public void basicTest1(){
@@ -28,6 +28,13 @@ public class DynamicProgrammingTspTest {
     @Test
     public void basicTest3(){
         String file = base_file + "tsp_test3.txt";
+        TravelingSalesmanProblem tsp = new DynamicProgrammingTsp(file, " ");
+        Assert.assertEquals(14.00, tsp.getTour(), 0.01);
+    }
+
+    @Test
+    public void advancedTest(){
+        String file = base_file + "tsp_25.txt";
         TravelingSalesmanProblem tsp = new DynamicProgrammingTsp(file, " ");
         Assert.assertEquals(14.00, tsp.getTour(), 0.01);
     }

@@ -8,21 +8,22 @@ import java.util.*;
  */
 public class Combinations {
 
-    public static Iterable<List<Integer>> nChooseR(int n, int r) {
-        List<Integer> cur = new ArrayList<>();
-        List<List<Integer>> output = new LinkedList<>();
+    public static Iterable<Set<Integer>> nChooseR(int n, int r) {
+        Set<Integer> cur = new HashSet<>();
+        List<Set<Integer>> output = new LinkedList<>();
         int[] nArray = new int[n];
         for(int i=0; i<n ;i++)
-            nArray[i] = i+1;
+            nArray[i] = i;
         return createCombination(output, cur, nArray, 0, r);
     }
 
-    private static List<List<Integer>> createCombination(List<List<Integer>> output, List<Integer> cur, int[] nArray, int index, int r) {
+    private static List<Set<Integer>> createCombination(List<Set<Integer>> output, Set<Integer> cur, int[] nArray,
+                                                        int index, int r) {
         if(cur.size() != r && index != nArray.length) {
-            List<Integer> newList = new ArrayList<>(cur);
+            Set<Integer> newList = new HashSet<>(cur);
             newList.add(nArray[index]);
             output = createCombination(output, newList, nArray, index+1, r);
-            output = createCombination(output, new ArrayList<>(cur), nArray, index+1, r);
+            output = createCombination(output, new HashSet<>(cur), nArray, index+1, r);
         }
         else if(cur.size() == r)
             output.add(cur);
