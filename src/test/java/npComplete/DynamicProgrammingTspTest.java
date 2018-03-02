@@ -36,6 +36,6 @@ public class DynamicProgrammingTspTest {
     public void advancedTest(){
         String file = base_file + "tsp_25.txt";
         TravelingSalesmanProblem tsp = new DynamicProgrammingTsp(file, " ");
-        Assert.assertEquals(14.00, tsp.getTour(), 0.01);
+        Assert.assertEquals(26442.00, tsp.getTour(), 1.0);
     }
 }

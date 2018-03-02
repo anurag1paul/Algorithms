@@ -15,7 +15,7 @@ public class CombinationsTest {
 
     @Test
     public void test(){
-        for(Set<Integer> c : Combinations.nChooseR(10,2)){
+        for(Set<Integer> c : Combinations.nChooseR(24,11)){
             System.out.println(c);
         }
     }

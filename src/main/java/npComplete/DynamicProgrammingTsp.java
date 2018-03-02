@@ -21,11 +21,12 @@ public class DynamicProgrammingTsp extends TravelingSalesmanProblem {
     @Override
     public double getTour() {
         double tourLength;
-
-        Map<AbstractMap.SimpleEntry<Set<Integer>, Integer>, Double> oldMap = new HashMap<>();
-        Set<Integer> baseSet = new HashSet<>();
+        Map<String, Map<Integer, Double>> oldMap = new HashMap<>();
+        Set<Integer> baseSet = new TreeSet<>();
         baseSet.add(0);
-        oldMap.put(new AbstractMap.SimpleEntry<>(baseSet, 0), 0.0);
+        Map<Integer, Double> baseValue = new HashMap<>();
+        baseValue.put(0,0.0);
+        oldMap.put(setToString(baseSet), baseValue);
 
         double minValue, newValue;
 
@@ -33,27 +34,31 @@ public class DynamicProgrammingTsp extends TravelingSalesmanProblem {
 
             logger.info("Currently working with m = {}", m);
 
-            Map<AbstractMap.SimpleEntry<Set<Integer>, Integer>, Double> newMap = new HashMap<>();
+            Map<String, Map<Integer, Double>> newMap = new HashMap<>();
 
-            for(Set<Integer> set: Combinations.nChooseR(numCities, m)){
-
-                if(set.contains(0)) {
-
-                    for(int j: set) {
-
-                        if(j!=0) {
-                            minValue = Double.MAX_VALUE;
-                            for(int k : set) {
-                                Set<Integer> keySet = new HashSet<>(set);
-                                keySet.remove(j);
-                                newValue = oldMap.getOrDefault(new AbstractMap.SimpleEntry<>(keySet, k), (double) Integer.MAX_VALUE);
+            for(Set<Integer> set: Combinations.nChooseR(numCities-1, m-1)){
+                set.add(0);
+                Set<Integer> keySet = new HashSet<>(set);
+                String setString = setToString(set);
+                Map<Integer, Double> setInternalMap = new HashMap<>();
+                for(int j: set) {
+                    if(j!=0) {
+                        minValue = Double.MAX_VALUE;
+                        keySet.remove(j);
+                        String keySetString = setToString(keySet);
+                        Map<Integer, Double> internalMap = oldMap.get(keySetString);
+                        if(internalMap != null) {
+                            for (int k : set) {
+                                newValue = internalMap.getOrDefault(k, (double) Integer.MAX_VALUE);
                                 newValue += matrix[k][j];
                                 minValue = Double.min(minValue, newValue);
                             }
-                            newMap.put(new AbstractMap.SimpleEntry<>(set, j), minValue);
                         }
+                        keySet.add(j);
+                        setInternalMap.put(j, minValue);
                     }
                 }
+                newMap.put(setString, setInternalMap);
             }
 
             oldMap = newMap;
@@ -64,11 +69,20 @@ public class DynamicProgrammingTsp extends TravelingSalesmanProblem {
         }
 
         tourLength = Double.MAX_VALUE;
+        String baseSetString = setToString(baseSet);
+        Map<Integer, Double> internalMap = oldMap.get(baseSetString);
         for(int j=1; j<numCities; j++) {
-            newValue = oldMap.get(new AbstractMap.SimpleEntry<>(baseSet, j)) + matrix[j][0];
+            newValue = internalMap.get(j) + matrix[j][0];
             tourLength = Double.min(tourLength, newValue);
         }
 
         return tourLength;
+    }
+
+    private String setToString(Set<Integer> set) {
+        StringBuilder builder = new StringBuilder();
+        for(Integer e: set)
+            builder.append(e).append(",");
+        return builder.toString();
     }
 }
