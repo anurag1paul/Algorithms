@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * @author Anurag Paul
@@ -65,5 +68,15 @@ public class karatsubaAlgorithmTest {
         end = System.nanoTime();
         System.out.println("Big Integer Multiplication Time Taken = " + (end - start) + "ns");
         Assert.assertEquals(b3.toString(), out);
+    }
+
+    @Test
+    public void test(){
+        int n=10;
+        int[] arr = {1,2,3,4,5,6,7,8,9,10};
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Comparator.reverseOrder());
+        for(int i=0; i<n; i++){
+
+        }
     }
 }

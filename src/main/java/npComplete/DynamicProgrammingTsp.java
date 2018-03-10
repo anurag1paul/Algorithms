@@ -4,6 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.Combinations;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -14,8 +17,25 @@ public class DynamicProgrammingTsp extends TravelingSalesmanProblem {
 
     private static Logger logger = LoggerFactory.getLogger(DynamicProgrammingTsp.class);
 
-    public DynamicProgrammingTsp(String filename, String sep) {
-        super(filename, sep);
+    public DynamicProgrammingTsp(String fileName, String sep) {
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line = reader.readLine();
+            numCities = Integer.parseInt(line);
+            line = reader.readLine();
+            while(line != null){
+                String[] elements = line.split(sep);
+                double x = Double.parseDouble(elements[0]);
+                double y = Double.parseDouble(elements[1]);
+                cities.add(new City(x, y));
+                line = reader.readLine();
+            }
+        }catch (IOException e) {
+            logger.error("File Load Error", e);
+            System.exit(1);
+        }
+
+        matrix = getDistanceMatrix();
     }
 
     @Override
