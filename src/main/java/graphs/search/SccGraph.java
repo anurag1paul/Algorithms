@@ -19,6 +19,7 @@ public class SccGraph {
 
     private static final Logger logger = LoggerFactory.getLogger(SccGraph.class);
 
+    private Graph initialGraph;
     private Graph graph;
     private int timer = 0;
     private int leader = 0;
@@ -26,11 +27,13 @@ public class SccGraph {
     private boolean[] explored;
     private Integer[] leaders;
     private int[] finishingTimes;
+    private int[] firstPassFinishingTimes;
 
     public SccGraph(String file, String sep, int numVertices){
 
         this.numVertices = numVertices;
-        graph = Graph.Builder.newInstance(numVertices).loadAdjacencyListGraphFromFile(file, sep, false).build();
+        initialGraph = Graph.Builder.newInstance(numVertices).loadAdjacencyListGraphFromFile(file, sep, false).build();
+        graph = initialGraph;
     }
 
     public SccGraph(Graph graph) {
@@ -64,6 +67,7 @@ public class SccGraph {
         }
 
         graph = builder.build();
+        firstPassFinishingTimes = finishingTimes;
     }
 
     public void dfsPass(boolean forward) {
@@ -99,8 +103,11 @@ public class SccGraph {
         return finishingTimes;
     }
 
-    public Integer[] getLeaders() {
-        return leaders;
+    public int[] getLeaders() {
+        int[] leadersInitialGraph = new int[numVertices];
+        for(int i=0; i<numVertices; i++)
+            leadersInitialGraph[i] = leaders[firstPassFinishingTimes[i] - 1];
+        return leadersInitialGraph;
     }
 
     public Map<Integer, Long> getAllScc(){
